@@ -4,3 +4,5 @@ tqdm==4.66.4
 pyarrow
 matplotlib
 openai
+moviepy
+opencv-python
