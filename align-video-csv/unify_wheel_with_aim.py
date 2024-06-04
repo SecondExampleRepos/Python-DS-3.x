@@ -3,6 +3,12 @@ import numpy as np
 from moviepy.editor import VideoFileClip
 import pandas as pd
 
+#Look wheel, compare with aim reading, when match boom. 
+# This is a very simple implementation. You can improve it by using more advanced techniques.
+# For example, you can use a neural network to detect the steering wheel and calculate the steering angle.
+#.... Idk if you wanna do that
+# Use a slider to seed a starting point, then pick a frame where the steering wheel is visible and the angle is known.
+
 def extract_frames(video_path, start_time):
     clip = VideoFileClip(video_path).subclip(start_time)
     frames = [(frame, t) for t, frame in enumerate(clip.iter_frames())]

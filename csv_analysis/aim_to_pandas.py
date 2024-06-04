@@ -18,14 +18,3 @@ def load_csv_with_custom_headers(file_path):
 
     return metadata, data_df
 
-
-# Usage
-file_path = 'samples/saurabh_gr86_Sonoma Race_a_0045.csv' #Put your thing here
-metadata, data_df = load_csv_with_custom_headers(file_path)
-
-print("Misc Info:")
-for key, value in metadata.items():
-    print(f"{key}: {value}")
-
-print("\nData Sample:")
-print(data_df.head())
