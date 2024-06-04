@@ -6,3 +6,4 @@ matplotlib
 openai
 moviepy
 opencv-python
+manim 
