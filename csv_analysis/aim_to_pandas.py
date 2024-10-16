@@ -17,4 +17,3 @@ def load_csv_with_custom_headers(file_path):
     data_df.columns = combined_headers  
 
     return metadata, data_df
-
