@@ -5,7 +5,7 @@ import pandas as pd
 from typing import Literal
 from dataclasses import dataclass
 
-#Does ANYBODY understand python imports? I don't. I just copy and paste.
+# Does ANYBODY understand python imports? I don't. I just copy and paste.
 def load_csv_with_custom_headers(file_path: Literal):
     metadata = {}
     with open(file_path, 'r') as file:
