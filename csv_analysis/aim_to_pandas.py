@@ -1,7 +1,12 @@
 import pandas as pd
+from typing import TypedDict, Required
 
-def load_csv_with_custom_headers(file_path: str) -> tuple[dict[str, str], pd.DataFrame]:
-    metadata = {}
+class Metadata(TypedDict):
+    key: Required[str]
+    value: Required[str]
+
+def load_csv_with_custom_headers(file_path: str) -> tuple[Metadata, pd.DataFrame]:
+    metadata: Metadata = {}
     with open(file_path, 'r') as file:
         for i in range(1, 14):  
             line = file.readline().strip().replace('"', '')
