@@ -9,12 +9,12 @@ import pandas as pd
 #.... Idk if you wanna do that
 # Use a slider to seed a starting point, then pick a frame where the steering wheel is visible and the angle is known.
 
-def extract_frames(video_path, start_time):
+def extract_frames(video_path: str, start_time: float) -> tuple[list[tuple[np.ndarray, int]], float]:
     clip = VideoFileClip(video_path).subclip(start_time)
     frames = [(frame, t) for t, frame in enumerate(clip.iter_frames())]
     return frames, clip.fps
 
-def detect_steering_wheel(frame):
+def detect_steering_wheel(frame: np.ndarray) -> np.ndarray | None:
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (7, 7), 0)
     edges = cv2.Canny(blurred, 50, 150)
@@ -25,7 +25,7 @@ def detect_steering_wheel(frame):
         return circles
     return None
 
-def calculate_steering_angle(frame, circles):
+def calculate_steering_angle(frame: np.ndarray, circles: np.ndarray | None) -> float | None:
     if circles is not None:
         for (x, y, r) in circles:
             ref_point = (frame.shape[1] // 2, frame.shape[0] // 2)
@@ -33,7 +33,7 @@ def calculate_steering_angle(frame, circles):
             return angle
     return None
 
-def find_timestamp_for_steering_angle(video_path, start_time, target_angle):
+def find_timestamp_for_steering_angle(video_path: str, start_time: float, target_angle: float) -> float | None:
     frames, fps = extract_frames(video_path, start_time)
 
     for frame, t in frames:
