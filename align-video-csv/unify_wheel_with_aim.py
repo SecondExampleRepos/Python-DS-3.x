@@ -57,4 +57,5 @@ try:
 except* (ValueError, TypeError) as e:
     # Handle multiple exceptions using the new except* syntax
     for exc in e.exceptions:
+        exc.add_note("An error occurred during processing.")
         print(f"An error occurred: {exc}")
