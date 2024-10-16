@@ -1,9 +1,8 @@
 pandas==1.5.3
 pyarrow==16.1.0
 tqdm==4.66.4
-pyarrow
-matplotlib
-openai
-moviepy
-opencv-python
-manim 
+pyarrow==16.1.0
+matplotlib==3.7.1
+moviepy==1.0.3
+opencv-python==4.8.0.74
+manim
