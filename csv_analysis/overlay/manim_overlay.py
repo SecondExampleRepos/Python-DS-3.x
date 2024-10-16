@@ -3,7 +3,6 @@ import cv2
 import numpy as np
 import pandas as pd
 
-#Does ANYBODY understand python imports? I don't. I just copy and paste.
 def load_csv_with_custom_headers(file_path):
     metadata = {}
     with open(file_path, 'r') as file:
