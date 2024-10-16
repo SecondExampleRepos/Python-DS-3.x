@@ -1,12 +1,14 @@
 import pandas as pd
 from typing import TypedDict, Required, Self, LiteralString
+from dataclasses import dataclass
 
-class Metadata(TypedDict):
-    key: Required[str]
-    value: Required[str]
+@dataclass
+class Metadata:
+    key: str
+    value: str
 
-def load_csv_with_custom_headers(file_path: LiteralString) -> tuple[Metadata, pd.DataFrame]:
-    metadata: Metadata = {}
+def load_csv_with_custom_headers(file_path: LiteralString) -> tuple[dict[str, str], pd.DataFrame]:
+    metadata: dict[str, str] = {}
     try:
         with open(file_path, 'r') as file:
             for i in range(1, 14):  
