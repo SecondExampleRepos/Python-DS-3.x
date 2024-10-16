@@ -2,11 +2,11 @@ from manim import *
 import cv2
 import numpy as np
 import pandas as pd
-from typing import LiteralString
+from typing import Literal
 from dataclasses import dataclass
 
 #Does ANYBODY understand python imports? I don't. I just copy and paste.
-def load_csv_with_custom_headers(file_path: LiteralString):
+def load_csv_with_custom_headers(file_path: Literal):
     metadata = {}
     with open(file_path, 'r') as file:
         for i in range(1, 14):  
@@ -27,8 +27,8 @@ def load_csv_with_custom_headers(file_path: LiteralString):
 @dataclass
 class OverlayGraphOnVideo(Scene):
     df: pd.DataFrame
-    video_path: LiteralString
-    column_name: LiteralString
+    video_path: Literal
+    column_name: Literal
 
     def __post_init__(self):
         super().__init__()
