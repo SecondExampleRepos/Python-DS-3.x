@@ -1,5 +1,5 @@
 import pandas as pd
-from typing import TypeVar, Generic
+from typing import TypeVar, Generic, Self
 
 # Define a type variable for DataFrame
 T = TypeVar('T', bound=pd.DataFrame)
@@ -7,10 +7,10 @@ T = TypeVar('T', bound=pd.DataFrame)
 # High temp LLM generated
 class RaceComparison(Generic[T]):
 
-    def __init__(self):
+    def __init__(self: Self) -> None:
         pass
 
-    def compare_speed(self, df1: T, df2: T) -> T:
+    def compare_speed(self: Self, df1: T, df2: T) -> T:
         """Compare speeds and return where df1 has higher speed than df2."""
         try:
             comparison = df1['GPS Speed (mph)'] > df2['GPS Speed (mph)']
@@ -19,7 +19,7 @@ class RaceComparison(Generic[T]):
             e.add_note("Missing column in DataFrame for speed comparison.")
             raise
 
-    def compare_lateral_acceleration(self, df1: T, df2: T) -> T:
+    def compare_lateral_acceleration(self: Self, df1: T, df2: T) -> T:
         """Compare lateral acceleration and return where df1 has higher lateral acceleration than df2."""
         try:
             comparison = df1['LateralAcc (g)'] > df2['LateralAcc (g)']
@@ -28,7 +28,7 @@ class RaceComparison(Generic[T]):
             e.add_note("Missing column in DataFrame for lateral acceleration comparison.")
             raise
 
-    def compare_longitudinal_acceleration(self, df1: T, df2: T) -> T:
+    def compare_longitudinal_acceleration(self: Self, df1: T, df2: T) -> T:
         """Compare longitudinal acceleration and return where df1 has higher longitudinal acceleration than df2."""
         try:
             comparison = df1['GPS LonAcc (g)'] > df2['GPS LonAcc (g)']
@@ -37,7 +37,7 @@ class RaceComparison(Generic[T]):
             e.add_note("Missing column in DataFrame for longitudinal acceleration comparison.")
             raise
 
-    def compare_yaw_rate(self, df1: T, df2: T) -> T:
+    def compare_yaw_rate(self: Self, df1: T, df2: T) -> T:
         """Compare yaw rates and return where df1 has lower yaw rate than df2."""
         try:
             comparison = df1['YawRate (deg/s)'] < df2['YawRate (deg/s)']
@@ -46,7 +46,7 @@ class RaceComparison(Generic[T]):
             e.add_note("Missing column in DataFrame for yaw rate comparison.")
             raise
 
-    def compare_gear(self, df1: T, df2: T) -> T:
+    def compare_gear(self: Self, df1: T, df2: T) -> T:
         """Compare gear and return where df1 has higher gear than df2."""
         try:
             comparison = df1['Gear (gear)'] > df2['Gear (gear)']
@@ -55,7 +55,7 @@ class RaceComparison(Generic[T]):
             e.add_note("Missing column in DataFrame for gear comparison.")
             raise
 
-    def compare_brake_pressure(self, df1: T, df2: T) -> T:
+    def compare_brake_pressure(self: Self, df1: T, df2: T) -> T:
         """Compare brake pressure and return where df1 has higher brake pressure than df2."""
         try:
             comparison = df1['BrakePress (psi)'] > df2['BrakePress (psi)']
@@ -64,7 +64,7 @@ class RaceComparison(Generic[T]):
             e.add_note("Missing column in DataFrame for brake pressure comparison.")
             raise
 
-    def compare_rpm(self, df1: T, df2: T) -> T:
+    def compare_rpm(self: Self, df1: T, df2: T) -> T:
         """Compare RPM and return where df1 has higher RPM than df2."""
         try:
             comparison = df1['RPM dup 2 (rpm)'] > df2['RPM dup 2 (rpm)']
@@ -73,7 +73,7 @@ class RaceComparison(Generic[T]):
             e.add_note("Missing column in DataFrame for RPM comparison.")
             raise
 
-    def compare_steer_angle(self, df1: T, df2: T) -> T:
+    def compare_steer_angle(self: Self, df1: T, df2: T) -> T:
         """Compare steer angle and return where df1 has lower steer angle than df2."""
         try:
             comparison = df1['SteerAngle (deg)'] < df2['SteerAngle (deg)']
@@ -82,7 +82,7 @@ class RaceComparison(Generic[T]):
             e.add_note("Missing column in DataFrame for steer angle comparison.")
             raise
 
-    def compare_oil_temp(self, df1: T, df2: T) -> T:
+    def compare_oil_temp(self: Self, df1: T, df2: T) -> T:
         """Compare oil temperature and return where df1 has lower oil temperature than df2."""
         try:
             comparison = df1['OilTemp (°F)'] < df2['OilTemp (°F)']
@@ -91,7 +91,7 @@ class RaceComparison(Generic[T]):
             e.add_note("Missing column in DataFrame for oil temperature comparison.")
             raise
 
-    def compare_speed_variation(self, df1: T, df2: T) -> T:
+    def compare_speed_variation(self: Self, df1: T, df2: T) -> T:
         """Compare speed variation and return where df1 has higher speed variation than df2."""
         try:
             comparison = df1['SpeedV (mph)'] > df2['SpeedV (mph)']
