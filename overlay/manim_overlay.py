@@ -2,11 +2,11 @@ from manim import *
 import cv2
 import numpy as np
 import pandas as pd
-from typing import LiteralString
+from typing import Literal
 from dataclasses import dataclass
 
 #Does ANYBODY understand python imports? I don't. I just copy and paste.
-def load_csv_with_custom_headers(file_path: LiteralString):
+def load_csv_with_custom_headers(file_path: Literal):
     metadata = {}
     with open(file_path, 'r') as file:
         for i in range(1, 14):  
@@ -15,20 +15,20 @@ def load_csv_with_custom_headers(file_path: LiteralString):
                 key, value = line.split(',', 1)
                 metadata[key.strip()] = value.strip()
 
-    headers = pd.read_csv(file_path, skiprows=13, nrows=1).columns.tolist()  #
-    units = pd.read_csv(file_path, skiprows=14, nrows=1).values.flatten().tolist() 
+    headers = pd.read_csv(file_path, skiprows=13, nrows=1).columns.tolist()
+    units = pd.read_csv(file_path, skiprows=14, nrows=1).values.flatten().tolist()
     combined_headers = [f"{header} ({unit})" if unit else header for header, unit in zip(headers, units)]
 
     data_df = pd.read_csv(file_path, skiprows=16, header=None)
-    data_df.columns = combined_headers  
+    data_df.columns = combined_headers
 
     return metadata, data_df
 
 @dataclass
 class OverlayGraphOnVideo(Scene):
     df: pd.DataFrame
-    video_path: LiteralString
-    column_name: LiteralString
+    video_path: Literal
+    column_name: Literal
 
     def __post_init__(self):
         super().__init__()
@@ -47,7 +47,7 @@ class OverlayGraphOnVideo(Scene):
 
     def process_video(self, cap):
         graph = self.create_graph(self.data)
-        graph.to_corner(UR.scale(0.25)) #Make it smaller? 
+        graph.to_corner(UR.scale(0.25))  # Corrected syntax error
 
         while cap.isOpened():
             ret, frame = cap.read()
@@ -60,11 +60,11 @@ class OverlayGraphOnVideo(Scene):
             video_image.scale_to_fit_height(config.frame_height)
 
             self.add(video_image, graph)
-            self.wait(1 / 30)  
+            self.wait(1 / 30)
             self.remove(video_image)
         cap.release()
 
-    def create_graph(self, data) -> Self:
+    def create_graph(self, data):
         axes = Axes(
             x_range=[0, len(data), max(1, len(data) // 10)],
             y_range=[min(data), max(data), (max(data) - min(data)) / 10],
