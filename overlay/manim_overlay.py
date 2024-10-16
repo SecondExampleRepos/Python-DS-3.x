@@ -2,7 +2,7 @@ from manim import *
 import numpy as np
 import cv2
 import pandas as pd
-from typing import TypeVar, Generic, Required, NotRequired, TypedDict
+from typing import TypeVar, Generic, Self
 
 # Does ANYBODY understand python imports? I don't. I just copy and paste.
 def load_csv_with_custom_headers(file_path):
@@ -34,7 +34,7 @@ class OverlayGraphOnVideo(Scene, Generic[T]):
         self.data = self.df[self.column_name].values
         self.construct()
 
-    def construct(self):
+    def construct(self) -> Self:
         # Load video
         cap = cv2.VideoCapture(self.video_path)
         ret, frame = cap.read()
@@ -43,8 +43,9 @@ class OverlayGraphOnVideo(Scene, Generic[T]):
             error.add_note("Check if the video path is correct and the file is accessible.")
             raise error
         self.process_video(cap)
+        return self
 
-    def process_video(self, cap):
+    def process_video(self, cap) -> None:
         graph = self.create_graph(self.data)
         graph.to_corner(UR.scale(0.25))  # Make it smaller?
 
@@ -63,7 +64,7 @@ class OverlayGraphOnVideo(Scene, Generic[T]):
             self.remove(video_image)
         cap.release()
 
-    def create_graph(self, data):
+    def create_graph(self, data) -> VGroup:
         axes = Axes(
             x_range=[0, len(data), max(1, len(data) // 10)],
             y_range=[min(data), max(data), (max(data) - min(data)) / 10],
