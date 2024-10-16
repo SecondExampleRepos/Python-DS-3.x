@@ -3,28 +3,25 @@ import numpy as np
 import cv2
 
 class OverlayGraphOnVideo(Scene):
-    def construct(self, frame):
-        video_path = "path_to_your_video.mp4" # the video of you sending it -- also make the API accept this @Saurabh
-        data = frame["Velocity (mph)"].values  # the data you want to overlay on the video, pick from DF
+    def __init__(self, df, video_path, column_name, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.df = df
+        self.video_path = video_path
+        self.column_name = column_name
+        self.data = self.df[self.column_name].values
+        self.construct()
 
+    def construct(self):
         # Load video
-        cap = cv2.VideoCapture(video_path)
+        cap = cv2.VideoCapture(self.video_path)
         ret, frame = cap.read()
         if not ret:
-            raise ValueError(f"Unable to read video file {video_path}")
-        frame_height, frame_width, _ = frame.shape
+            raise ValueError(f"Unable to read video file {self.video_path}")
+        self.process_video(cap)
 
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        frame_rgb = np.fliplr(frame_rgb)
-        video_image = ImageMobject(frame_rgb)
-        video_image.scale(2)
-
-        graph = self.create_graph(data)
-
-        graph.to_corner(UR)
-
-        self.add(video_image, graph)
-
+    def process_video(self, cap):
+        graph = self.create_graph(self.data)
+        graph.to_corner(UR.scale(0.25))  # Make it smaller?
 
         while cap.isOpened():
             ret, frame = cap.read()
@@ -34,24 +31,33 @@ class OverlayGraphOnVideo(Scene):
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             frame_rgb = np.fliplr(frame_rgb)
             video_image = ImageMobject(frame_rgb)
-            video_image.scale(2)
-            self.add(video_image, graph)
-            self.wait(1 / 30)  # Assuming 30 fps video
+            video_image.scale_to_fit_height(config.frame_height)
 
+            self.add(video_image, graph)
+            self.wait(1 / 30)
+            self.remove(video_image)
         cap.release()
 
     def create_graph(self, data):
         axes = Axes(
-            x_range=[0, len(data), 1],
-            y_range=[0, max(data) + 1, 1],
+            x_range=[0, len(data), max(1, len(data) // 10)],
+            y_range=[min(data), max(data), (max(data) - min(data)) / 10],
             axis_config={"color": BLUE},
         )
-
         graph = axes.plot_line_graph(
-            x_values=range(len(data)),
+            x_values=list(range(len(data))),
             y_values=data,
-            line_color=YELLOW
+            line_color=YELLOW,
         )
         return VGroup(axes, graph)
 
+if __name__ == "__main__":
+    # Dummy DataFrame setup
+    meta, df = load_csv_with_custom_headers("samples/saurabh_gr86_Sonoma Race_a_0045.csv")
 
+    video_path = "thing"  # Update this to your video path
+    column_name = 'GPS Speed (mph)'  # see notebook for column names
+
+    config.media_width = "100%"
+    scene = OverlayGraphOnVideo(df, video_path, column_name)
+    scene.render()
