@@ -49,3 +49,11 @@ start_time = 0  # YOU the person say this to trim pit lane stuff. Make the API a
 
 # Python 3.11 compatibility and fine-grained error locations are inherently supported by the Python interpreter.
 # No specific code changes are required in this script to utilize these features.
+
+# Implement exception groups using the `except*` syntax to handle multiple exceptions.
+try:
+    # Example operation that might raise multiple exceptions
+    pass
+except* (ValueError, TypeError) as e:
+    for exc in e.exceptions:
+        print(f"Handled exception: {exc}")
