@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import pandas as pd
 from typing import LiteralString
+from dataclasses import dataclass
 
 #Does ANYBODY understand python imports? I don't. I just copy and paste.
 def load_csv_with_custom_headers(file_path: LiteralString):
@@ -23,13 +24,14 @@ def load_csv_with_custom_headers(file_path: LiteralString):
 
     return metadata, data_df
 
-
+@dataclass
 class OverlayGraphOnVideo(Scene):
-    def __init__(self, df: pd.DataFrame, video_path: LiteralString, column_name: LiteralString, *args: *Ts, **kwargs: **Ts) -> Self:
-        super().__init__(*args, **kwargs)
-        self.df = df
-        self.video_path = video_path
-        self.column_name = column_name
+    df: pd.DataFrame
+    video_path: LiteralString
+    column_name: LiteralString
+
+    def __post_init__(self):
+        super().__init__()
         self.data = self.df[self.column_name].values
         self.construct()
 
