@@ -1,6 +1,27 @@
 from manim import *
 import numpy as np
 import cv2
+import pandas as pd
+
+# Does ANYBODY understand python imports? I don't. I just copy and paste.
+def load_csv_with_custom_headers(file_path):
+    metadata = {}
+    with open(file_path, 'r') as file:
+        for i in range(1, 14):
+            line = file.readline().strip().replace('"', '')
+            if ',' in line:
+                key, value = line.split(',', 1)
+                metadata[key.strip()] = value.strip()
+
+    headers = pd.read_csv(file_path, skiprows=13, nrows=1).columns.tolist()
+    units = pd.read_csv(file_path, skiprows=14, nrows=1).values.flatten().tolist()
+    combined_headers = [f"{header} ({unit})" if unit else header for header, unit in zip(headers, units)]
+
+    data_df = pd.read_csv(file_path, skiprows=16, header=None)
+    data_df.columns = combined_headers
+
+    return metadata, data_df
+
 
 class OverlayGraphOnVideo(Scene):
     def __init__(self, df, video_path, column_name, *args, **kwargs):
