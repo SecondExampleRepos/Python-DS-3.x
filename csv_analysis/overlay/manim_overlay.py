@@ -24,7 +24,7 @@ def load_csv_with_custom_headers(file_path):
 
 
 class OverlayGraphOnVideo(Scene):
-    def __init__(self, df, video_path, column_name, *args: *Ts, **kwargs: **Ts):
+    def __init__(self, df, video_path, column_name, *args: *Ts, **kwargs: **Ts) -> Self:
         super().__init__(*args, **kwargs)
         self.df = df
         self.video_path = video_path
