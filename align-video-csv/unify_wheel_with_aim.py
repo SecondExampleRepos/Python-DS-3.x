@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from moviepy.editor import VideoFileClip
 import pandas as pd
+from typing import LiteralString
 
 # Look wheel, compare with aim reading, when match boom. 
 # This is a very simple implementation. You can improve it by using more advanced techniques.
@@ -9,7 +10,7 @@ import pandas as pd
 #.... Idk if you wanna do that
 # Use a slider to seed a starting point, then pick a frame where the steering wheel is visible and the angle is known.
 
-def extract_frames(video_path, start_time):
+def extract_frames(video_path: LiteralString, start_time: float):
     clip = VideoFileClip(video_path).subclip(start_time)
     frames = [(frame, t) for t, frame in enumerate(clip.iter_frames())]
     return frames, clip.fps
@@ -33,7 +34,7 @@ def calculate_steering_angle(frame, circles):
             return angle
     return None
 
-def find_timestamp_for_steering_angle(video_path, start_time, target_angle):
+def find_timestamp_for_steering_angle(video_path: LiteralString, start_time: float, target_angle: float):
     frames, fps = extract_frames(video_path, start_time)
 
     for frame, t in frames:
