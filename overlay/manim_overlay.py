@@ -61,7 +61,7 @@ class OverlayGraphOnVideo(Scene):
             self.remove(video_image)
         cap.release()
 
-    def create_graph(self, data):
+    def create_graph(self, data) -> Self:
         axes = Axes(
             x_range=[0, len(data), max(1, len(data) // 10)],
             y_range=[min(data), max(data), (max(data) - min(data)) / 10],
