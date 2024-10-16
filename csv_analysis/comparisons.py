@@ -11,7 +11,7 @@ class RaceComparison:
         try:
             comparison = df1['GPS Speed (mph)'] > df2['GPS Speed (mph)']
             return df1[comparison]
-        except KeyError as e:
+        except* KeyError as e:
             raise KeyError(f"Missing column in DataFrame: {e}") from e
 
     def compare_lateral_acceleration(self, df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
@@ -19,7 +19,7 @@ class RaceComparison:
         try:
             comparison = df1['LateralAcc (g)'] > df2['LateralAcc (g)']
             return df1[comparison]
-        except KeyError as e:
+        except* KeyError as e:
             raise KeyError(f"Missing column in DataFrame: {e}") from e
 
     def compare_longitudinal_acceleration(self, df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
@@ -27,7 +27,7 @@ class RaceComparison:
         try:
             comparison = df1['GPS LonAcc (g)'] > df2['GPS LonAcc (g)']
             return df1[comparison]
-        except KeyError as e:
+        except* KeyError as e:
             raise KeyError(f"Missing column in DataFrame: {e}") from e
 
     def compare_yaw_rate(self, df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
@@ -35,7 +35,7 @@ class RaceComparison:
         try:
             comparison = df1['YawRate (deg/s)'] < df2['YawRate (deg/s)']
             return df1[comparison]
-        except KeyError as e:
+        except* KeyError as e:
             raise KeyError(f"Missing column in DataFrame: {e}") from e
 
     def compare_gear(self, df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
@@ -43,7 +43,7 @@ class RaceComparison:
         try:
             comparison = df1['Gear (gear)'] > df2['Gear (gear)']
             return df1[comparison]
-        except KeyError as e:
+        except* KeyError as e:
             raise KeyError(f"Missing column in DataFrame: {e}") from e
 
     def compare_brake_pressure(self, df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
@@ -51,7 +51,7 @@ class RaceComparison:
         try:
             comparison = df1['BrakePress (psi)'] > df2['BrakePress (psi)']
             return df1[comparison]
-        except KeyError as e:
+        except* KeyError as e:
             raise KeyError(f"Missing column in DataFrame: {e}") from e
 
     def compare_rpm(self, df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
@@ -59,7 +59,7 @@ class RaceComparison:
         try:
             comparison = df1['RPM dup 2 (rpm)'] > df2['RPM dup 2 (rpm)']
             return df1[comparison]
-        except KeyError as e:
+        except* KeyError as e:
             raise KeyError(f"Missing column in DataFrame: {e}") from e
 
     def compare_steer_angle(self, df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
@@ -67,7 +67,7 @@ class RaceComparison:
         try:
             comparison = df1['SteerAngle (deg)'] < df2['SteerAngle (deg)']
             return df1[comparison]
-        except KeyError as e:
+        except* KeyError as e:
             raise KeyError(f"Missing column in DataFrame: {e}") from e
 
     def compare_oil_temp(self, df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
@@ -75,7 +75,7 @@ class RaceComparison:
         try:
             comparison = df1['OilTemp (°F)'] < df2['OilTemp (°F)']
             return df1[comparison]
-        except KeyError as e:
+        except* KeyError as e:
             raise KeyError(f"Missing column in DataFrame: {e}") from e
 
     def compare_speed_variation(self, df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
@@ -83,7 +83,7 @@ class RaceComparison:
         try:
             comparison = df1['SpeedV (mph)'] > df2['SpeedV (mph)']
             return df1[comparison]
-        except KeyError as e:
+        except* KeyError as e:
             raise KeyError(f"Missing column in DataFrame: {e}") from e
 
 # Fight each other with this.
