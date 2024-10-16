@@ -49,3 +49,12 @@ start_time = 0  # YOU the person say this to trim pit lane stuff. Make the API a
 
 # Utilize fine-grained error locations in tracebacks for better error debugging.
 # Python 3.11 automatically provides more detailed tracebacks, so no additional code is needed for this feature.
+
+try:
+    # Example of a block where multiple exceptions might occur
+    # This is a placeholder for actual code that might raise exceptions
+    pass
+except* (ValueError, TypeError) as e:
+    # Handle multiple exceptions using the new except* syntax
+    for exc in e.exceptions:
+        print(f"An error occurred: {exc}")
