@@ -19,6 +19,7 @@ def load_csv_with_custom_headers(file_path):
 
         return metadata, data_df
 
-    except* (FileNotFoundError, pd.errors.EmptyDataError) as e:
+    except (FileNotFoundError, pd.errors.EmptyDataError) as e:
+        e.add_note("Ensure the file path is correct and the file is not empty.")
         print(f"Error loading CSV file: {e}")
         return {}, pd.DataFrame()
