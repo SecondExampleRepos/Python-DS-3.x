@@ -2,9 +2,10 @@ from manim import *
 import cv2
 import numpy as np
 import pandas as pd
+from typing import LiteralString
 
 #Does ANYBODY understand python imports? I don't. I just copy and paste.
-def load_csv_with_custom_headers(file_path):
+def load_csv_with_custom_headers(file_path: LiteralString):
     metadata = {}
     with open(file_path, 'r') as file:
         for i in range(1, 14):  
@@ -24,7 +25,7 @@ def load_csv_with_custom_headers(file_path):
 
 
 class OverlayGraphOnVideo(Scene):
-    def __init__(self, df, video_path, column_name, *args: *Ts, **kwargs: **Ts) -> Self:
+    def __init__(self, df: pd.DataFrame, video_path: LiteralString, column_name: LiteralString, *args: *Ts, **kwargs: **Ts) -> Self:
         super().__init__(*args, **kwargs)
         self.df = df
         self.video_path = video_path
