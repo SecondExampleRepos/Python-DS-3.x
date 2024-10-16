@@ -1,8 +1,8 @@
 import pandas as pd
 
-#High temp LLM generated
+# High temp LLM generated
 class RaceComparison:
-    
+
     def __init__(self):
         pass
 
@@ -51,12 +51,9 @@ class RaceComparison:
         comparison = df1['OilTemp (°F)'] < df2['OilTemp (°F)']
         return df1[comparison]
 
-
     def compare_speed_variation(self, df1: pd.DataFrame, df2: pd.DataFrame) -> pd.DataFrame:
         """Compare speed variation and return where df1 has higher speed variation than df2."""
         comparison = df1['SpeedV (mph)'] > df2['SpeedV (mph)']
         return df1[comparison]
 
-
-
-# Fight each other with this. 
+# Fight each other with this.
