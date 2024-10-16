@@ -2,6 +2,7 @@ from manim import *
 import numpy as np
 import cv2
 import pandas as pd
+from typing import TypeVar, Generic
 
 # Does ANYBODY understand python imports? I don't. I just copy and paste.
 def load_csv_with_custom_headers(file_path):
@@ -22,9 +23,10 @@ def load_csv_with_custom_headers(file_path):
 
     return metadata, data_df
 
+T = TypeVar('T')
 
-class OverlayGraphOnVideo(Scene):
-    def __init__(self, df, video_path, column_name, *args, **kwargs):
+class OverlayGraphOnVideo(Scene, Generic[T]):
+    def __init__(self, df: pd.DataFrame, video_path: str, column_name: str, *args: T, **kwargs: T):
         super().__init__(*args, **kwargs)
         self.df = df
         self.video_path = video_path
