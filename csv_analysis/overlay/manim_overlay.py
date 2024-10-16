@@ -42,7 +42,7 @@ class OverlayGraphOnVideo(Scene):
 
     def process_video(self, cap):
         graph = self.create_graph(self.data)
-        graph.to_corner(UR. scale(0.25)) #Make it smaller? 
+        graph.to_corner(UR.scale(0.25))  # Make it smaller?
 
         while cap.isOpened():
             ret, frame = cap.read()
