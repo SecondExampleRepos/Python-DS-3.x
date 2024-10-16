@@ -1,5 +1,5 @@
 import pandas as pd
-from typing import TypedDict, Required, Self, LiteralString
+from typing import TypedDict, Required, LiteralString
 
 class Metadata(TypedDict):
     key: Required[str]
