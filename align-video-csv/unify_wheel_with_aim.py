@@ -56,4 +56,5 @@ try:
     pass
 except* (ValueError, TypeError) as e:
     for exc in e.exceptions:
+        exc.add_note("Handled exception with additional context")
         print(f"Handled exception: {exc}")
