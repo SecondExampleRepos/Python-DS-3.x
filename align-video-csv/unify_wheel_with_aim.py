@@ -3,7 +3,7 @@ import numpy as np
 from moviepy.editor import VideoFileClip
 import pandas as pd
 
-#Look wheel, compare with aim reading, when match boom. 
+# Look wheel, compare with aim reading, when match boom. 
 # This is a very simple implementation. You can improve it by using more advanced techniques.
 # For example, you can use a neural network to detect the steering wheel and calculate the steering angle.
 #.... Idk if you wanna do that
@@ -46,4 +46,3 @@ def find_timestamp_for_steering_angle(video_path, start_time, target_angle):
 
 video_path = "path_to_your_video.mp4"
 start_time = 0  # YOU the person say this to trim pit lane stuff. Make the API accept this @Saurabh
-
