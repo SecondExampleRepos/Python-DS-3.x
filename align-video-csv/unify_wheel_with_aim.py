@@ -46,3 +46,6 @@ def find_timestamp_for_steering_angle(video_path, start_time, target_angle):
 
 video_path = "path_to_your_video.mp4"
 start_time = 0  # YOU the person say this to trim pit lane stuff. Make the API accept this @Saurabh
+
+# Utilize fine-grained error locations in tracebacks for better error debugging.
+# Python 3.11 automatically provides more detailed tracebacks, so no additional code is needed for this feature.
