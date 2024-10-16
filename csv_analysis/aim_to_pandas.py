@@ -1,6 +1,6 @@
 import pandas as pd
 
-def load_csv_with_custom_headers(file_path):
+def load_csv_with_custom_headers(file_path: str) -> tuple[dict[str, str], pd.DataFrame]:
     metadata = {}
     try:
         with open(file_path, 'r') as file:
