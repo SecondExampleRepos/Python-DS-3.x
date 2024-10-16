@@ -3,6 +3,7 @@ import numpy as np
 from moviepy.editor import VideoFileClip
 import pandas as pd
 from typing import LiteralString
+from dataclasses import dataclass
 
 # Look wheel, compare with aim reading, when match boom. 
 # This is a very simple implementation. You can improve it by using more advanced techniques.
@@ -10,9 +11,14 @@ from typing import LiteralString
 #.... Idk if you wanna do that
 # Use a slider to seed a starting point, then pick a frame where the steering wheel is visible and the angle is known.
 
-def extract_frames(video_path: LiteralString, start_time: float) -> tuple[list[tuple[np.ndarray, int]], float]:
+@dataclass
+class FrameData:
+    frame: np.ndarray
+    time: int
+
+def extract_frames(video_path: LiteralString, start_time: float) -> tuple[list[FrameData], float]:
     clip = VideoFileClip(video_path).subclip(start_time)
-    frames = [(frame, t) for t, frame in enumerate(clip.iter_frames())]
+    frames = [FrameData(frame, t) for t, frame in enumerate(clip.iter_frames())]
     return frames, clip.fps
 
 def detect_steering_wheel(frame: np.ndarray) -> np.ndarray | None:
@@ -37,11 +43,11 @@ def calculate_steering_angle(frame: np.ndarray, circles: np.ndarray | None) -> f
 def find_timestamp_for_steering_angle(video_path: LiteralString, start_time: float, target_angle: float) -> float | None:
     frames, fps = extract_frames(video_path, start_time)
 
-    for frame, t in frames:
-        circles = detect_steering_wheel(frame)
-        angle = calculate_steering_angle(frame, circles)
+    for frame_data in frames:
+        circles = detect_steering_wheel(frame_data.frame)
+        angle = calculate_steering_angle(frame_data.frame, circles)
         if angle is not None and np.isclose(angle, target_angle, atol=1):
-            timestamp = start_time + (t / fps)
+            timestamp = start_time + (frame_data.time / fps)
             return timestamp
     return None
 
