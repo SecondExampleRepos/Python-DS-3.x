@@ -1,5 +1,5 @@
 import pandas as pd
-from typing import TypeVar, Generic, Self
+from typing import TypeVar, Generic, Self, LiteralString
 
 # Define a type variable for DataFrame
 T = TypeVar('T', bound=pd.DataFrame)
