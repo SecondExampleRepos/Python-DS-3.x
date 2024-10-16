@@ -2,7 +2,7 @@ from manim import *
 import numpy as np
 import cv2
 import pandas as pd
-from typing import TypeVar, Generic
+from typing import TypeVar, Generic, Required, NotRequired, TypedDict
 
 # Does ANYBODY understand python imports? I don't. I just copy and paste.
 def load_csv_with_custom_headers(file_path):
