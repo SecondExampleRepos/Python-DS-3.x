@@ -3,6 +3,7 @@ import numpy as np
 from moviepy.editor import VideoFileClip
 import pandas as pd
 from typing import LiteralString
+from dataclasses import dataclass
 
 # Look wheel, compare with aim reading, when match boom. 
 # This is a very simple implementation. You can improve it by using more advanced techniques.
