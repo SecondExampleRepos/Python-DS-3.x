@@ -37,7 +37,9 @@ class OverlayGraphOnVideo(Scene):
         cap = cv2.VideoCapture(self.video_path)
         ret, frame = cap.read()
         if not ret:
-            raise ValueError(f"Unable to read video file {self.video_path}")
+            error = ValueError(f"Unable to read video file {self.video_path}")
+            error.add_note("Check if the video path is correct and the file is accessible.")
+            raise error
         self.process_video(cap)
 
     def process_video(self, cap):
